@@ -76,8 +76,8 @@ def cliente_bloqueado(request):
 			cliente.save()
 			datePF = datetime.strptime(cliente.datPag, "%Y-%m-%d").strftime("%d de %B de %Y")
 			return JsonResponse({'id': cliente.id, 'datPagF': datePF, 'datPag': cliente.datPag, 'mesRef': cliente.mesRef})
-  		else: 
-			cliente = Cliente.objects.get(pk=request.POST.get('id'))
+  		else:
+  			cliente = Cliente.objects.get(pk=request.POST.get('id'))
 			cliente.bloqueado = not cliente.bloqueado
 			cliente.save()
 			return HttpResponse(cliente.bloqueado)
