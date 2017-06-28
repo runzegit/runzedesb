@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if clientes %}
+<div class="col-sm-5">
+	<div class="navbar-default sidebar" role="navigation">                  
+        <div class="sidebar-nav">                      
+            <ul class="nav affix">   
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" id="busca" class="form-control ttspan-fill" placeholder="Search...">
+                        <span class="input-group-btn ttspan-fill">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+            </ul>          
+        </div>
+    </div>
+    <div class="navbar-default sidebar clientes" role="navigation">                  
+        <div class="sidebar-nav">                      
+            <ul class="nav affix" id="side-menu">   
+               {% for cliente in clientes  %}
+                <li>
+                    <a id="{{cliente.id}}" class="cliente" href=""><i class="fa fa-dashboard fa-fw"></i><span class="ttspan-fill">{{cliente.cnpj}} - {{cliente.nomClie}}
+					</span></a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>                             
+{% else %}
+	<p>Nenhum cliente encontrado</p>
+{% endif %}
+</div>
+<div class="col-sm-7">
+	<div id='cliente_list' class="row"></div>	
+</div>
+<!--<div class="input-group">
+	<span class="input-group-btn">
+		<a  class="btn btn-success" href="{% url 'clientes:cliente_new' %}">Novo</a>
+	</span>
+</div>-->
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-4 input-group custom-search-form busca-table">
+    <input type="text" id="busca-cliente" class="form-control ttspan-fill" placeholder="Search...">
+    <span class="input-group-btn ttspan-fill">
+        <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+    </span>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registrar Pagamento</h4>
+      </div>
+      <div class="modal-body">
+        	<input type="hidden" id="id-cliente">
+        	<div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' id="data-pag" required class="form-control"/>
+                    <p id="error-data-pag"  style="display:none;">Data obrigatória</p>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <input type="number" class="form-control" id="mesref"  required placeholder="Mês Referência" min="1" max="31">
+            <p id="error-mesref"  style="display:none;">Mês obrigatório</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btn-salvar-modal" class="btn btn-success">Salvar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% if clientes %}
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<th>Cliente</th>
+				<th>CNPJ</th>
+				<th>Dia Venc.</th>
+				<th>Dt. Ult. Pag.</th>
+				<th>Dias Bloqueio</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody id="table-clientes">
+<!-- 		{% for cliente in clientes  %}
+			<tr>
+				<th>{{cliente.nomClie}}</th>
+				<th>{{cliente.cnpj}}</th>
+				<th>{{cliente.diasBlo}}</th>
+				<th>
+					<label class="switch ativo">
+					  <input class="ativo" alt="{{cliente.id}}" type="checkbox" {% if cliente.ativo %} checked {% endif %}>
+					  <div class="slider round">
+					  	{% if not cliente.ativo %} 
+					  		Ativo
+					  	{% else %}
+					  		Inativo
+					  	{% endif %}
+					  </div>
+					</label>
+					<label class="switch">
+					  <input class="bloqueado" alt="{{cliente.id}}" type="checkbox" {% if cliente.bloqueado %} checked {% endif %}>
+					  <div class="slider round">
+					  	{% if cliente.bloqueado %} 
+					  		Bloqueado
+					  	{% else %}
+					  		Desbloqueado
+					  	{% endif %}
+					  </div>
+					</label>					
+				</th>
+			</tr>
+{% endfor %} -->
+		</tbody>
+	</table>
+{% else %}
+	<p>Nenhum cliente</p>
+{% endif %}
+
+{% endblock content %}

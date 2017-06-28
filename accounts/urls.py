@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from . import views as local_views 
 from rest_framework.authtoken import views as rest_framework_views 
 
+app_name="accounts"
 urlpatterns = [
 	url(r'^login/$', local_views.get_auth_token, name='login'),
 	url(r'^logout/$', local_views.logout_user, name='logout'),

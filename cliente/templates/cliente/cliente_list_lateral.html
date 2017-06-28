@@ -1,0 +1,8 @@
+{% load staticfiles %}
+{% for cliente in clientes  %}
+<li>
+    <a id="{{cliente.id}}" class="cliente" href=""><i class="fa fa-dashboard fa-fw"></i><span class="ttspan-fill">{{cliente.cnpj}} - {{cliente.nomClie}}
+    </span></a>
+</li>
+{% endfor %}
+<script src="{% static 'cliente/cliente.js' %}"></script>

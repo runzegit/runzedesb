@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Runze Desbloqueio</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/style.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top navbar-default">
+          <div class="container-fluid">
+            {% if request.user.is_authenticated %}
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/cliente/">
+                   <img src="{% static 'imagens/rtopo.png' %}">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse button-top" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'clientes:cliente_list' %}">Cadastros<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{% url 'clientes:cliente_desb' %}">Lista<span class="sr-only">(current)</span></a></li>
+                </ul>
+                <a href="{% url 'accounts:logout' %}" class="btn btn-default navbar-btn navbar-right">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                </a>
+            </div>
+            {% endif %}
+          </div>
+        </nav>
+    	<div class="row content main">
+    		<div role="main">
+    			{% block content %}
+    			{% endblock %}
+    		</div>
+    	</div>
+    </div>		
+    <div class="footer navbar-fixed-bottom text-center">
+        <footer>
+    	   <p>@ 2017 Runze Tecnologia - Todos os direitos reservados </p>
+        </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/script.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+  </body>
+</html>

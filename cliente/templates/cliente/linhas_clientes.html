@@ -1,0 +1,40 @@
+{% load staticfiles %}
+{% for cliente in clientes  %}
+<tr class="linhas">
+	<td>{{cliente.nomClie}}</td>
+	<td>{{cliente.cnpj}}</td>
+	<td class='direita'>{{cliente.diaVen}}</td>
+	<td class='direita'>
+		<span class="span-data">{{cliente.datPag}}</span><br />
+		<p class="mesref" >
+		<button type="button" alt='{{cliente.id}}' class="btn btn-default btn-modal" data-toggle="modal" data-target="#myModal" aria-label="Alinhar na esquerda">
+  		<span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
+		</button>  Mês Ref.: <span class="span-mes">{{cliente.mesRef}}</span></p>
+	</td>
+	<td class="diasBloq direita" alt="{{cliente.diaVen}}||{{cliente.datPag|date:'Y-m-d'}}||{{cliente.mesRef}}">
+	</td>
+	<td>
+		<label class="switch ativo">
+		  <input class="ativo" alt="{{cliente.id}}" type="checkbox" {% if cliente.ativo %} checked {% endif %}>
+		  <div class="slider round">
+		  	{% if not cliente.ativo %} 
+		  		Ativo
+		  	{% else %}
+		  		Inativo
+		  	{% endif %}
+		  </div>
+		</label>
+		<label class="switch">
+		  <input class="bloqueado"  alt="{{cliente.id}}" type="checkbox" {% if cliente.bloqueado %} checked {% endif %}>
+		  <div class="slider round">
+		  	{% if cliente.bloqueado %} 
+		  		Bloqueado
+		  	{% else %}
+		  		Desbloqueado
+		  	{% endif %}
+		  </div>
+		</label>
+	</td>
+</tr>
+{% endfor %}
+<script src="{% static 'cliente/cliente.js' %}"></script>

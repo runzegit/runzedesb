@@ -1,22 +1,26 @@
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+{% extends 'base.html' %}
+{% load staticfiles %}
 
-{% csrf_token %}
-Username: <input type='text' name='username' id='username' />
-<br>
-Password: <input type='password' name='password' id='password' />
-<br>
-<input type='submit' value='Login' id='login_form' />
-
-<script>
-  $("#login_form").on("click", function(e) {
-    var username = $("#username").val();
-    var password = $("#password").val();
-
-    $.post("/accounts/get_auth_token/", {"username": username, "password": password})
-      .success(function(data) {
-        var token = data["token"];
-        document.cookie = 'token='+token+";path=/";
-        window.location.href = "/cliente/";
-      });
-  });
-</script>
+{% block content %}
+<div class="col-sm-3 sidenav">
+	<img src="{% static 'imagens/runze.jpg' %}">
+</div>
+<form method='POST' action=" {{ request.path }}{% if next %}?next={{ next }}{% endif %} ">{% csrf_token %}
+{% for field in form %}
+<fieldset class="control-group">
+    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+    <div class="controls">
+        {{ field }}
+        <p class="help-text">{{ field.help_text }} </p>
+    </div>
+</fieldset>
+{% endfor %}
+<div class="input-group">
+	<span class="input-group-btn">
+		<button class="btn btn-success" type="submit">
+			Logar
+		</button>
+	</span>
+</div>
+</form>
+{% endblock content %}
