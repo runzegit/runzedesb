@@ -76,8 +76,8 @@ def cliente_bloqueado(request):
 			datePF = datetime.strptime(cliente.datPag, "%Y-%m-%d").strftime("%d de %B de %Y")
 			return JsonResponse({'id': cliente.id, 'datPagF': datePF, 'datPag': cliente.datPag, 'mesRef': cliente.mesRef})
 		else:
-  			cliente = Cliente.objects.get(pk=request.POST.get('id'))
-  			cliente.bloqueado = not cliente.bloqueado
+			cliente = Cliente.objects.get(pk=request.POST.get('id'))
+			cliente.bloqueado = not cliente.bloqueado
 			cliente.save()
 			return HttpResponse(cliente.bloqueado)
 
@@ -96,7 +96,7 @@ def cliente_new(request):
 @login_required(login_url='accounts:login_form')
 def cliente_edit(request, pk):
 	cliente = get_object_or_404(Cliente, pk=pk)
-	duplicatas =  Duplicata.objects.filter(codClie=cliente)
+	duplicatas = Duplicata.objects.filter(codClie=cliente)
 	if request.method == "POST":
 		form = ClienteForm(request.POST, instance=cliente)
 		if form.is_valid():
@@ -152,13 +152,13 @@ def cliente_api(request):
 				resultadoJ = {"resultado":resultado}
 				return JsonResponse(resultadoJ)
 			else:
-			    content = {"erro no codigo":"chave de verificacao invalida"}
-			    return Response(content, status=status.HTTP_404_NOT_FOUND)
+				content = {"erro no codigo":"chave de verificacao invalida"}
+				return Response(content, status=status.HTTP_404_NOT_FOUND)
 		else:
 			cliente.bloqueado = True
 			cliente.datDesb = datetime.now()
 			cliente.save()
-		   	content = {"status":"ok"}
+			content = {"status":"ok"}
 			return Response(content, status=200)
 
 class ClienteViewSet(viewsets.ModelViewSet):
