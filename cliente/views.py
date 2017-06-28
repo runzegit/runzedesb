@@ -75,13 +75,8 @@ def cliente_bloqueado(request):
 			cliente.mesRef = request.POST.get('mes')
 			cliente.save()
 			datePF = datetime.strptime(cliente.datPag, "%Y-%m-%d").strftime("%d de %B de %Y")
-#			t = loader.get_template('cliente/cliente_data.html')
-#			c = Context({'data': cliente.datPag, 'id': cliente.id, 'mesRef': cliente.mesRef})
- # 			return HttpResponse(t.render(c))
-# 			return render(request, 'cliente~/cliente_data.html', {'cliente': cliente})
-  			return JsonResponse({'id': cliente.id, 'datPagF': datePF, 'datPag': cliente.datPag, 'mesRef': cliente.mesRef })
-
-		else: 
+			return JsonResponse({'id': cliente.id, 'datPagF': datePF, 'datPag': cliente.datPag, 'mesRef': cliente.mesRef})
+  		else: 
 			cliente = Cliente.objects.get(pk=request.POST.get('id'))
 			cliente.bloqueado = not cliente.bloqueado
 			cliente.save()
