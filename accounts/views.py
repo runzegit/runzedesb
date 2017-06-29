@@ -16,7 +16,7 @@ def logout_user(request, *args, **kwargs):
 def login_form(request, *args, **kwargs):
 	if request.user.is_authenticated():
 		return redirect('clientes:cliente_list')
-	kwargs['extra_context'] = {'next':'/cliente/'}
+	kwargs['extra_context'] = {'next':'/'}
 	kwargs['template_name'] = 'accounts/login.html'
 	return auth_login(request, *args, **kwargs)
 
