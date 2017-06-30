@@ -29,7 +29,7 @@ def cliente_list(request):
 	if request.method=='POST':
 		cliente = get_object_or_404(Cliente, pk=request.POST.get('cliente_id'))
 		form = ClienteForm(instance=cliente)
-		return render(request, 'cliente/cliente_detail.html', {'form': form, 'cliente_id': cliente.id})	
+		return render(request, 'cliente/cliente_detail.html', {'form': form, 'cliente_id': cliente.id, 'action': str(cliente.id)+'/edit/'})	
 			#return HttpResponse(html)
 	else:
 		clientes = Cliente.objects.all()[:10]
@@ -96,7 +96,6 @@ def cliente_new(request):
 @login_required(login_url='accounts:login_form')
 def cliente_edit(request, pk):
 	cliente = get_object_or_404(Cliente, pk=pk)
-	duplicatas = Duplicata.objects.filter(codClie=cliente)
 	if request.method == "POST":
 		form = ClienteForm(request.POST, instance=cliente)
 		if form.is_valid():
@@ -107,11 +106,13 @@ def cliente_edit(request, pk):
 		form = ClienteForm(instance=cliente)	
 	return render(request, 'cliente/cliente_detail.html', {'form': form, 'duplicatas': duplicatas})
 
+@csrf_exempt
 @login_required(login_url='accounts:login_form')
-def cliente_delete(request, pk):
-	cliente = get_object_or_404(Cliente, pk=pk)
-	cliente.delete()
-	return redirect('clientes:cliente_list')
+def cliente_delete(request):
+	if request.method == 'POST':
+		cliente = get_object_or_404(Cliente, pk=request.POST.get('id'))
+		cliente.delete()
+		return redirect('clientes:cliente_list')
 
 @csrf_exempt
 @api_view(['POST'])

@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
-<form method="POST">{% csrf_token %}
+<form method="POST" action="{{ action }}">{% csrf_token %}
 	{% for field in form %}
 	<div class="form-group">
 		{% if field.name == 'ativo' %}
@@ -33,13 +33,16 @@
 		{% endif %}
 	</div>
 	{% endfor %}
-<!--	<div class="input-group">
+	<div class="input-group">
 		<span class="input-group-btn">
 			<button id="cliente_btn_salvar" class="btn btn-success" type="submit">
 				Salvar
 			</button>
+			<button id="cliente_btn_excluir" alt={{cliente_id}} class="btn btn-danger" style="margin-left: 10px;">
+				Excluir
+			</button>
 		</span>
-	</div>-->
+	</div>
 </form>
 <script src="{% static 'cliente/cliente.js' %}"></script>
 

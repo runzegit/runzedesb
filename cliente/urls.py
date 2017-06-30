@@ -16,5 +16,5 @@ urlpatterns = [
 	url(r'^bloqueado/$', views.cliente_bloqueado, name="cliente_bloqueado"), 
 	url(r'^new/$', views.cliente_new, name="cliente_new"), 
 	url(r'^(?P<pk>[0-9]+)/edit/$', views.cliente_edit, name="cliente_edit"), 
-	url(r'^(?P<pk>[0-9]+)/delete/$', views.cliente_delete, name="cliente_delete"), 	
+	url(r'^delete/$', views.cliente_delete, name="cliente_delete"), 	
 ]

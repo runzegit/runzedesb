@@ -1,4 +1,4 @@
-$.post('/cliente/desbbusca/', {busca: ''}, function(data){
+$.post('/desbbusca/', {busca: ''}, function(data){
 	$('#table-clientes').html(data);
 });
 
@@ -39,11 +39,11 @@ $('#busca').keyup(function(){
 $('#busca-cliente').keyup(function(){
 	var texto = $(this).val();
 	if (texto.length>3){
-		$.post('/cliente/desbbusca/', {busca: texto}, function(data){
+		$.post('/desbbusca/', {busca: texto}, function(data){
 			$('#table-clientes').html(data);
 		});	
 	}else if(texto.length==0){
-		$.post('/cliente/desbbusca/', {busca: ''}, function(data){
+		$.post('/desbbusca/', {busca: ''}, function(data){
 			$('#table-clientes').html(data);
 		});
 	}
@@ -58,7 +58,7 @@ $('#btn-salvar-modal').on('click', function(e){
 	var data = parse[2]+'-'+parse[1]+'-'+parse[0];
 	var mes = $('#mesref').val();
 	var id = $('#id-cliente').val();
-	$.post('/cliente/bloqueado/', {id: id, data: data, mes: mes, pagamento: 'pagamaneto'}, function(dados){
+	$.post('/bloqueado/', {id: id, data: data, mes: mes, pagamento: 'pagamaneto'}, function(dados){
 		$('table tbody tr').each(function(){
 			var colunas =  $(this).children();
 			if ($(colunas[3]).find('button').attr('alt')==id){	

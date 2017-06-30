@@ -1,8 +1,3 @@
-$('#cliente_btn_salvar').on('click', function(e){
-	e.preventDefault();
-
-	var formData = new FormData($('form'));
-});
 $('.cliente').on('click', function(e){
 	e.preventDefault();
 	$.post('', {cliente_id: $(this).attr('id')}, function(data){
@@ -10,14 +5,14 @@ $('.cliente').on('click', function(e){
 	});
 });
 $('.bloqueado').on('click', function(e){
-	$.post('/cliente/bloqueado/', {id: $(this).attr('alt')}, function(data){});	
+	$.post('/bloqueado/', {id: $(this).attr('alt')}, function(data){});	
 	if($(this).is(':checked'))
 		$(this).siblings('div').html("Bloqueado");
 	else
 		$(this).siblings('div').html("Desbloqueado");
 });
 $('.ativo').on('click', function(e){
-	$.post('/cliente/bloqueado/', {id: $(this).attr('alt'), status: 'ativo'}, function(data){});	
+	$.post('/bloqueado/', {id: $(this).attr('alt'), status: 'ativo'}, function(data){});	
 	if($(this).is(':checked'))
 		$(this).siblings('div').html("Inativo");
 	else
@@ -44,4 +39,16 @@ $('table tbody tr').each(function(){
 $('.btn-modal').on('click', function(){
 	$('#id-cliente').val($(this).attr('alt'));
 	//$(this).click();
+});
+
+$('#cliente_btn_excluir').on('click', function(e){
+	e.preventDefault();
+	var resultado = confirm("Deseja remover o cliente?");
+	if (resultado)
+		$.post('/delete/', {id: $(this).attr('alt')}, function(data){
+			$.post('busca/', {busca: ''}, function(data){
+				$('#cliente_list').html('');
+				$('#side-menu').html(data);
+			});
+		});
 });
