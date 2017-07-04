@@ -3,7 +3,7 @@
 {% block content %}
 {% if clientes %}
 <div class="col-sm-5">
-	<div class="navbar-default sidebar" role="navigation">                  
+	<div class="navbar-default sidebar" role="navigation" id="sidebar-search">                  
         <div class="sidebar-nav">                      
             <ul class="nav affix">   
                 <li class="sidebar-search">
@@ -20,9 +20,9 @@
             </ul>          
         </div>
     </div>
-    <div class="navbar-default sidebar clientes" role="navigation">                  
+    <div class="navbar-default sidebar clientes" role="navigation" >                  
         <div class="sidebar-nav">                      
-            <ul class="nav affix" id="side-menu">   
+            <ul class="nav affix" id="side-menu" >   
                {% for cliente in clientes  %}
                 <li>
                     <a id="{{cliente.id}}" class="cliente" href=""><i class="fa fa-dashboard fa-fw"></i><span class="ttspan-fill">{{cliente.cnpj}} - {{cliente.nomClie}}

@@ -7,9 +7,22 @@ body {
   background-color: #f8f8f8;
 }
 
+.container-fluid{
+  padding: 0;
+  width: 100%;
+  margin: 0px;
+}
+
+div div.col-sm-5{
+  padding: 0;
+}
+
 .main{
-	padding-top: 58px;
+	padding-top: 64px;
 	padding-bottom: 48px;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
 }
 .footer{
 	background-color: #f8f8f8;
@@ -81,12 +94,7 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-.sidebar .sidebar-search {
-  padding: 15px;
-}
-.sidebar-search {
-  width: 400px;
-}
+
 .sidebar ul li {
   border-bottom: 1px solid #e7e7e7;
 }
@@ -113,6 +121,23 @@ body {
   padding-left: 52px;
 }
 
+
+@media (min-width: 320px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+  }
+  .navbar-top-links .dropdown-messages,
+  .navbar-top-links .dropdown-tasks,
+  .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+  .sidebar .sidebar-search {
+    padding: 15px;
+  }
+
+}
 @media (min-width: 768px) {
   .sidebar {
     z-index: 1;
@@ -124,7 +149,17 @@ body {
   .navbar-top-links .dropdown-alerts {
     margin-left: auto;
   }
+  
+  .sidebar-search {
+    width: 485px;
+  }
+  
+  .sidebar .sidebar-search {
+    padding: 15px;
+  }
+
 }
+
 .btn-outline {
   color: inherit;
   background-color: transparent;
@@ -415,6 +450,7 @@ table.dataTable thead .sorting:after {
 .timeline-body > p + p {
   margin-top: 5px;
 }
+
 @media (max-width: 767px) {
   ul.timeline:before {
     left: 40px;
@@ -444,6 +480,31 @@ table.dataTable thead .sorting:after {
     border-right-width: 14px;
     border-left-width: 0;
   }
+
+  .form-group {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .form-group [type='number']{
+    width: 10%;
+  }
+
+  form .input-group {
+    padding: 5%;
+  }
+  .list-group{
+    width: 100%;
+  }
+
+  .navbar-fixed-top{
+    padding: 2%;
+  }
+
+  .busca-table{
+    margin: 3%;
+  }
+
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -541,17 +602,25 @@ table.dataTable thead .sorting:after {
         background-color: #f8f8f8;
         visibility: visible;
     }
+    .form-group {
+      width: 98%;
+    }
+
+    .form-group [type='number']{
+      width: 10%;
+    }
+
+    .navbar-fixed-top{
+      padding-left: 2%;
+      padding-right: 2%;
+    }
+
+
+    .busca-table{
+      margin: 1%;
+    }
+
 }
-
-.form-group {
-	width: 98%;
-}
-
-.form-group [type='number']{
-	width: 10%;
-}
-
-
 
 
 .switch {
@@ -625,11 +694,7 @@ input:checked + .slider:before {
   width: 95%
 
 }
-.busca-table{
-  margin-left: 3%;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
+
 
 .clientes{
   margin-top: 60px;

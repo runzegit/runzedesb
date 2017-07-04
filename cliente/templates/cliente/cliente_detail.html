@@ -3,30 +3,7 @@
 <form method="POST" action="{{ action }}">{% csrf_token %}
 	{% for field in form %}
 	<div class="form-group">
-		{% if field.name == 'ativo' %}
-			<label class="switch ativo">
-			  <input class="ativo" {% if field.value %} checked {% endif %} alt="{{cliente_id}}" type="checkbox">
-			  <div class="slider round">
-			  	{% if not field.value %} 
-			  		Ativo
-			  	{% else %}
-			  		Inativo
-			  	{% endif %}
-			  </div>
-			</label>
-		{% elif field.name == 'bloqueado' %}
-			<label class="switch">
-			  <input class="bloqueado" {% if field.value %} checked {% endif %} alt="{{cliente_id}}" type="checkbox">
-			  <div class="slider round">
-			  	{% if field.value %} 
-			  		Bloqueado
-			  	{% else %}
-			  		Desbloqueado
-			  	{% endif %}
-			  </div>
-			</label>
-		{% else %}
-
+		{% if field.name != 'ativo' and field.name != 'bloqueado' %}
 			<label for="id_{{ field.name }}">{{ field.label }}</label>
 		    {{field|add_class:"form-control" }}
 		    <p class="help-text">{{ field.help_text }} </p>

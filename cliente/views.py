@@ -57,7 +57,12 @@ def cliente_desb_busca(request):
 		clientes = Cliente.objects.filter(
 			Q(nomClie__icontains=request.POST.get('busca')) | Q(cnpj__icontains=request.POST.get('busca'))
 		)
-		return render(request, 'cliente/linhas_clientes.html', {'clientes': clientes})
+		if int(request.POST.get('largura'))<768:
+			return render(request, 'cliente/linhas_clientes_mobile.html', {'clientes': clientes})
+		else:
+			return render(request, 'cliente/linhas_clientes.html', {'clientes': clientes})
+
+
 
 @csrf_exempt
 @login_required(login_url='accounts:login_form')

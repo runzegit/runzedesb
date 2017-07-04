@@ -51,4 +51,4 @@ $('#cliente_btn_excluir').on('click', function(e){
 				$('#side-menu').html(data);
 			});
 		});
-});
+})

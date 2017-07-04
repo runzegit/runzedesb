@@ -41,6 +41,7 @@
   </div>
 </div>
 {% if clientes %}
+	<div id="table-cliente-normal">
 	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
@@ -84,6 +85,9 @@
 {% endfor %} -->
 		</tbody>
 	</table>
+	</div>
+	<div id='table-clientes-mobile' class='list-group'>
+	</div>
 {% else %}
 	<p>Nenhum cliente</p>
 {% endif %}
