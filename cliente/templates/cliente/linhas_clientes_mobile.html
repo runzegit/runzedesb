@@ -3,7 +3,7 @@
 <div class="list-group-item list-group-item-action flex-column align-items-start">
 	<h4>
 		<b>{{cliente.nomClie}}</b>
-		<span class="badge badge-pill diasBloq" alt="{{cliente.diaVen}}||{{cliente.datPag|date:'Y-m-d'}}||{{cliente.mesRef}}" >1</span>
+		<span class="badge diasBloq" alt="{{cliente.diaVen}}||{{cliente.datPag|date:'Y-m-d'}}||{{cliente.mesRef}}" >1</span>
 	</h4>
 	<h5>{{cliente.cnpj}}</h5>
 	<p><b>Dia Vencimento</b> {{cliente.diaVen}}</p>
@@ -14,7 +14,7 @@
 		 <span class="span-data">{{cliente.datPag}}</span> Mês Ref.: <span class="span-mes">{{cliente.mesRef}}</span></button></p>
 	</div>
 	<div>
-		<label class="switch ativo">
+		<label class="switch ativolb">
 		  <input class="ativo" alt="{{cliente.id}}" type="checkbox" {% if cliente.ativo %} checked {% endif %}>
 		  <div class="slider round">
 		  	{% if not cliente.ativo %} 

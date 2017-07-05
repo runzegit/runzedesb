@@ -12,9 +12,11 @@ $.post('/desbbusca/', {busca: '', largura: largura_tela}, function(data){
 				dataRef.setDate(dataRef.getDate()+45);
 				var dias = Math.round((dataRef-new Date())/(1000 * 60 * 60 * 24));
 				if(dias<11 && dias >=0)
-					$(this).find('.diasBloq').addClass('list-group-item-warning');
+					$(this).find('.diasBloq').removeClass('list-group-item-danger').addClass('list-group-item-warning');
 				else if (dias < 0)
-					$(this).find('.diasBloq').addClass('list-group-item-danger');
+					$(this).find('.diasBloq').removeClass('list-group-item-warning').addClass('list-group-item-danger');
+				else
+					$(this).find('.diasBloq').removeClass('list-group-item-warning').removeClass('list-group-item-danger');
 				$(this).find('.diasBloq').html(dias);
 			});
 			$('#table-clientes').hide();
@@ -95,29 +97,59 @@ $('#btn-salvar-modal').on('click', function(e){
 	var mes = $('#mesref').val();
 	var id = $('#id-cliente').val();
 	$.post('/bloqueado/', {id: id, data: data, mes: mes, pagamento: 'pagamaneto'}, function(dados){
-		$('table tbody tr').each(function(){
-			var colunas =  $(this).children();
-			if ($(colunas[3]).find('button').attr('alt')==id){	
-				$(colunas[3]).find('.span-data').html(dados.datPagF);
-				$(colunas[3]).find('.span-mes').html(dados.mesRef);
-				//$(colunas[3]).html(dados);
-				var parse = $(colunas[4]).attr('alt').split('||');
-				$(colunas[4]).attr('alt', parse[0]+'||'+data+'||'+mes);
-				var parse = $(colunas[4]).attr('alt').split("||");
-				var diaVen = (parse[0].trim().length==1?'0'+parse[0].trim():parse[0].trim());
-				var datPag = new Date(parse[1]);
-				var mesRef = (parse[2].trim().length==1?'0'+parse[2].trim():parse[2].trim());
-				var stringDataParse = datPag.getFullYear()+'-'+mesRef+'-'+diaVen;
-				var dataRef = new Date(stringDataParse);
-				dataRef.setDate(dataRef.getDate()+45);
-				var dias = Math.round((dataRef- new Date())/(1000 * 60 * 60 * 24));
-				if(dias<11 && dias >=0)
-					$(this).addClass('bg-warning');
-				else if (dias < 0)
-					$(this).addClass('bg-danger');
-				$(colunas[4]).html(dias);
-			}
-		});
+		largura_tela = $(window).width();
+		if (largura_tela < 768){
+			$('#table-clientes-mobile').children("div").each(function(){
+				if ($(this).find('button').attr('alt')==id){	
+					$(this).find('.span-data').html(dados.datPagF);
+					$(this).find('.span-mes').html(dados.mesRef);
+					var parse = $(this).find('.diasBloq').attr('alt').split("||");
+					$(this).find('.diasBloq').attr('alt', parse[0]+'||'+data+'||'+mes);
+					parse = $(this).find('.diasBloq').attr('alt').split("||");
+					var diaVen = (parse[0].trim().length==1?'0'+parse[0].trim():parse[0].trim());
+					var datPag = new Date(parse[1]);
+					var mesRef = (parse[2].trim().length==1?'0'+parse[2].trim():parse[2].trim());
+					var stringDataParse = datPag.getFullYear()+'-'+mesRef+'-'+diaVen;
+					var dataRef = new Date(stringDataParse);
+					dataRef.setDate(dataRef.getDate()+45);
+					var dias = Math.round((dataRef-new Date())/(1000 * 60 * 60 * 24));
+					if(dias<11 && dias >=0)
+						$(this).find('.diasBloq').removeClass('list-group-item-danger').addClass('list-group-item-warning');
+					else if (dias < 0)
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').addClass('list-group-item-danger');
+					else
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').removeClass('list-group-item-danger');
+					$(this).find('.diasBloq').html(dias);
+				}
+			});
+		}else{
+			$('table tbody tr').each(function(){
+				var colunas =  $(this).children();
+				if ($(colunas[3]).find('button').attr('alt')==id){	
+					$(colunas[3]).find('.span-data').html(dados.datPagF);
+					$(colunas[3]).find('.span-mes').html(dados.mesRef);
+					//$(colunas[3]).html(dados);
+					var parse = $(colunas[4]).attr('alt').split('||');
+					$(colunas[4]).attr('alt', parse[0]+'||'+data+'||'+mes);
+					var parse = $(colunas[4]).attr('alt').split("||");
+					var diaVen = (parse[0].trim().length==1?'0'+parse[0].trim():parse[0].trim());
+					var datPag = new Date(parse[1]);
+					var mesRef = (parse[2].trim().length==1?'0'+parse[2].trim():parse[2].trim());
+					var stringDataParse = datPag.getFullYear()+'-'+mesRef+'-'+diaVen;
+					var dataRef = new Date(stringDataParse);
+					dataRef.setDate(dataRef.getDate()+45);
+					var dias = Math.round((dataRef- new Date())/(1000 * 60 * 60 * 24));
+					if(dias<11 && dias >=0)
+						$(this).removeClass('bg-danger').addClass('bg-warning');
+					else if (dias < 0)
+						$(this).removeClass('bg-warning').addClass('bg-danger');
+					else
+						$(this).removeClass('bg-danger').removeClass('bg-warning');
+
+					$(colunas[4]).html(dias);
+				}
+			});
+		}
 
 	});
 	$('#myModal').modal('toggle');	

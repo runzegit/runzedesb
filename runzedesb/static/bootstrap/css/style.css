@@ -136,6 +136,13 @@ div div.col-sm-5{
   .sidebar .sidebar-search {
     padding: 15px;
   }
+  .login{
+    padding: 2%;
+    text-align: center;
+  }
+  .btnlogin{
+    width: 100%;
+  }
 
 }
 @media (min-width: 768px) {
@@ -151,11 +158,20 @@ div div.col-sm-5{
   }
   
   .sidebar-search {
-    width: 485px;
+    width: 195%;
   }
   
   .sidebar .sidebar-search {
     padding: 15px;
+  }
+
+  .logo{
+    padding: 2%;
+  }
+
+  .login{
+    padding: 2%;
+    text-align: left;
   }
 
 }
@@ -615,6 +631,11 @@ table.dataTable thead .sorting:after {
       padding-right: 2%;
     }
 
+    .col-sm-7{
+      float: left;
+      width: 58%;
+    }
+
 
     .busca-table{
       margin: 1%;
@@ -630,7 +651,7 @@ table.dataTable thead .sorting:after {
   height: 34px;
 }
 
-.ativo{
+.ativolb{
   width: 120px;
 }
 
