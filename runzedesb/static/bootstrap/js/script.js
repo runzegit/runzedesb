@@ -76,13 +76,65 @@ $('#busca').keyup(function(){
 });
 $('#busca-cliente').keyup(function(){
 	var texto = $(this).val();
+	largura_tela = $(window).width();
 	if (texto.length>3){
-		$.post('/desbbusca/', {busca: texto}, function(data){
-			$('#table-clientes').html(data);
+		$.post('/desbbusca/', {busca: texto, 'largura': largura_tela}, function(data){
+			if (largura_tela < 768){
+				$('#table-clientes-mobile').html(data);
+				$('#table-clientes-mobile').children("div").each(function(){
+					var parse = $(this).find('.diasBloq').attr('alt').split("||");
+					var diaVen = (parse[0].trim().length==1?'0'+parse[0].trim():parse[0].trim());
+					var datPag = new Date(parse[1]);
+					var mesRef = (parse[2].trim().length==1?'0'+parse[2].trim():parse[2].trim());
+					var stringDataParse = datPag.getFullYear()+'-'+mesRef+'-'+diaVen;
+					var dataRef = new Date(stringDataParse);
+					dataRef.setDate(dataRef.getDate()+45);
+					var dias = Math.round((dataRef-new Date())/(1000 * 60 * 60 * 24));
+					if(dias<11 && dias >=0)
+						$(this).find('.diasBloq').removeClass('list-group-item-danger').addClass('list-group-item-warning');
+					else if (dias < 0)
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').addClass('list-group-item-danger');
+					else
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').removeClass('list-group-item-danger');
+					$(this).find('.diasBloq').html(dias);
+				});
+				$('#table-clientes').hide();
+				$('#table-cliente-normal').hide();
+			}else{
+				$('#table-cliente-normal').show();
+				$('#table-clientes-mobile').hide();
+				$('#table-clientes').html(data);
+			}
 		});	
 	}else if(texto.length==0){
-		$.post('/desbbusca/', {busca: ''}, function(data){
-			$('#table-clientes').html(data);
+		$.post('/desbbusca/', {busca: '', 'largura': largura_tela}, function(data){
+			if (largura_tela < 768){
+				$('#table-clientes-mobile').html(data);
+				$('#table-clientes-mobile').children("div").each(function(){
+					var parse = $(this).find('.diasBloq').attr('alt').split("||");
+					var diaVen = (parse[0].trim().length==1?'0'+parse[0].trim():parse[0].trim());
+					var datPag = new Date(parse[1]);
+					var mesRef = (parse[2].trim().length==1?'0'+parse[2].trim():parse[2].trim());
+					var stringDataParse = datPag.getFullYear()+'-'+mesRef+'-'+diaVen;
+					var dataRef = new Date(stringDataParse);
+					dataRef.setDate(dataRef.getDate()+45);
+					var dias = Math.round((dataRef-new Date())/(1000 * 60 * 60 * 24));
+					if(dias<11 && dias >=0)
+						$(this).find('.diasBloq').removeClass('list-group-item-danger').addClass('list-group-item-warning');
+					else if (dias < 0)
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').addClass('list-group-item-danger');
+					else
+						$(this).find('.diasBloq').removeClass('list-group-item-warning').removeClass('list-group-item-danger');
+					$(this).find('.diasBloq').html(dias);
+				});
+				$('#table-clientes').hide();
+				$('#table-cliente-normal').hide();
+			}else{
+				$('#table-cliente-normal').show();
+				$('#table-clientes-mobile').hide();
+				$('#table-clientes').html(data);
+
+			}
 		});
 	}
 });
