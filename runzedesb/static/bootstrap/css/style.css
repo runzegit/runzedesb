@@ -161,12 +161,6 @@ div div.col-sm-5{
     width: 36%;
   }
   
-  @-moz-document url-prefix() {
-     .sidebar-search { 
-        width: 198%;
-      }
-  }
-
   .sidebar .sidebar-search {
     padding: 15px;
   }
